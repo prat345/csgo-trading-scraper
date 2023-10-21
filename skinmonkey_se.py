@@ -31,9 +31,9 @@ def item_exterior():
   driver.implicitly_wait(2)
 
   checkboxs = driver.find_elements("xpath", "//div[contains(@class, 'trade-filter-option__box')]")
-  print([i.get_attribute('innterText') for i in list(checkboxs)])
+  # print([i.get_attribute('innterText') for i in list(checkboxs)])
   FT = checkboxs[3]
-  print(FT)
+  # print(FT)
   action = ActionChains(driver).move_to_element(FT)
   action.click(FT)
   action.perform()
@@ -98,7 +98,6 @@ def search(search_item, driver, site):
       # action.move_to_element(items[i])
       action.move_to_element(btn)
       time.sleep(2)
-      driver.implicitly_wait(5)
       action.click(btn)
       action.perform()
 
@@ -116,7 +115,7 @@ def search(search_item, driver, site):
       action = ActionChains(driver).move_to_element(close)
       action.click(close)
       action.perform()
-
+      time.sleep(1)
       # print(i, fv, price)
       arr.append({'Float':fv, 'Price':price, 'Name':name, 'Lock':lock})
 
