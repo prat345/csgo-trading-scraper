@@ -9,15 +9,22 @@ import pandas as pd
 import time
 import re
 
-
 def open_site():
-  path = "c:\Program Files (x86)\chromedriver-win64\chromedriver.exe"
-  driver = webdriver.Chrome(path)
+  path = "C:\Program Files (x86)\chromedriver-win64\chromedriver.exe"
+  options = webdriver.ChromeOptions()
+  options.headless = True
+  # options.add_argument('--headless')
+  options.add_argument("--window-size=1920,1080")
+  user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
+  options.add_argument(f'user-agent={user_agent}') # prevent blocks
+  options.add_argument('log-level=3') # surpress warning
+  driver = webdriver.Chrome(path, options=options)
   driver.maximize_window()
   driver.get("https://skinsmonkey.com/trade")
   # driver.implicitly_wait(10)
-  time.sleep(5)
+  time.sleep(10)
   site = driver.find_element("xpath", "//div[contains(@class, 'trade-inventory')][contains(@data-inventory, 'SITE')]")
+  # driver.get_screenshot_as_file("screenshot.png")
   return driver, site
 
 def item_exterior():
@@ -68,6 +75,7 @@ def item_searchbar(search_item, site):
   action.click(submit)
   action.perform()
   time.sleep(2)
+  # driver.get_screenshot_as_file(f"{search_item}.png")
 
 def format_time(text):
     text = text.replace('Locked for ', '')

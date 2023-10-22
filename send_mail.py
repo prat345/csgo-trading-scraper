@@ -2,6 +2,7 @@ import os
 import smtplib
 from email.message import EmailMessage
 from skinmonkey_se import exec
+import datetime
 
 def send_mail(sum):
     EMAIL_ADDRESS = "pratprasert@gmail.com"
@@ -15,7 +16,7 @@ def send_mail(sum):
     message = ''
     for item, df in sum.items():
         message += f'''
-            <h2 class='item-name'><u>Item:</u> {item}</h2>
+            <h3 class='item-name'><u>Item</u>: {item}</h3>
             <p>{df.to_html()}</p>
             '''
     html_string = f'''
@@ -46,7 +47,8 @@ def send_mail(sum):
             </style>
         </head>
         <body>
-            {message}
+            <p>[update] &nbsp; {datetime.datetime.now():%d/%m/%Y %H:%M:%S}</p>
+            <div>{message}</div>
         </body>
     </html>
     '''
@@ -56,6 +58,7 @@ def send_mail(sum):
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         smtp.send_message(msg)
+        print('\nEmail sent...')
 
 if __name__ == '__main__':
     sum = exec()
