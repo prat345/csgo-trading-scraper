@@ -1,4 +1,4 @@
-# Scrape trading sites for CSGO items
+# Scrape CSGO items from trading sites 
 
 > CSGO Items can have high value depending on their rarity, float value, patterns. Multiple trading sites recirculate items all the time and the most valuable items with lowest price are being reserved quickly. 
 Therefore, this project aims 
