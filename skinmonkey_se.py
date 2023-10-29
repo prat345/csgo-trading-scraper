@@ -18,7 +18,10 @@ def open_site():
   user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
   options.add_argument(f'user-agent={user_agent}') # prevent blocks
   options.add_argument('log-level=3') # surpress warning
-  driver = webdriver.Chrome(path, options=options)
+  driver = webdriver.Chrome(
+    path,
+    options=options
+   )
   driver.maximize_window()
   driver.get("https://skinsmonkey.com/trade")
   # driver.implicitly_wait(10)
@@ -35,9 +38,12 @@ def item_exterior():
   action.click(exterior)
   action.perform()
   time.sleep(2)
-  driver.implicitly_wait(2)
 
-  checkboxs = driver.find_elements("xpath", "//div[contains(@class, 'trade-filter-option__box')]")
+  # checkboxs = WebDriverWait(driver, 10).until(
+  #     EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'trade-filter-option__box')]"))
+  # )
+
+  checkboxs = driver.find_elements("xpath", "//div[contains(@class, 'trade-filter-option-generic__box')]")
   # print([i.get_attribute('innterText') for i in list(checkboxs)])
   FT = checkboxs[3]
   # print(FT)
@@ -69,7 +75,7 @@ def item_searchbar(search_item, site):
   action.double_click(search).click_and_hold(search).send_keys(Keys.CLEAR)
   action.send_keys(search_item)
   action.perform()
-  time.sleep(1)
+  time.sleep(2)
   submit = site.find_element("xpath", "//div[contains(@id, 'search-phrase')][contains(@class, 'search-results__phrase')]")
   action = ActionChains(driver).move_to_element(submit)
   action.click(submit)
@@ -108,7 +114,7 @@ def search(search_item, driver, site):
       time.sleep(2)
       action.click(btn)
       action.perform()
-
+      time.sleep(1)
       item_page = site.find_element('xpath',"//div[contains(@class, 'item-details item-details--730')]")
       fv = item_page.find_element('xpath', "//span[contains(@class, 'item-details-param__value')]")
       fv = fv.get_attribute('innerText').strip('\n')
@@ -118,7 +124,7 @@ def search(search_item, driver, site):
       name = name.get_attribute('innerText').strip('\n')
       lock = item_page.find_element('xpath', "//div[contains(@class, 'item-details-lock item-details__lock item-details__lock--desktop')]")
       lock = lock.get_attribute('innerText').strip('\n')
-
+      time.sleep(1)
       close = item_page.find_element('xpath',"//div[contains(@class, 'modal__close')][contains(@role, 'button')]")
       action = ActionChains(driver).move_to_element(close)
       action.click(close)

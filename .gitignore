@@ -1,0 +1,6 @@
+*.png
+*.text
+*.html
+test.*
+web_scrapping.py
+skinmonkey_bs.py
