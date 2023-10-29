@@ -4,3 +4,4 @@
 test.*
 web_scrapping.py
 skinmonkey_bs.py
+__pycache__/
