@@ -149,7 +149,7 @@ def exec():
   driver, site = open_site()
   item_exterior()
   sum = {}
-  for i in ['AWP Asiimov', 'M4A4 | Buzz Kill', 'AK | Fuel Injector', 'M4A1-S | Cyrex']:
+  for i in ['AWP Asiimov', 'M4A4 | Buzz Kill', 'AK-47 | Fuel Injector', 'M4A1-S | Cyrex']:
     try:
       print('-'*100)
       print('>>>', i)
