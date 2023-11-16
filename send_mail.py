@@ -3,11 +3,18 @@ import smtplib
 from email.message import EmailMessage
 from skinmonkey_se import exec
 import datetime
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load the environment variables
+
+load_dotenv()
 
 def send_mail(sum):
     EMAIL_ADDRESS = "pratprasert@gmail.com"
-    EMAIL_PASSWORD = "okyi evqd qyhq gdkq"
-
+    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+    print(EMAIL_PASSWORD)
+    
     msg = EmailMessage()
     msg['Subject'] = "Daily Skin Report"
     msg['From'] = EMAIL_ADDRESS
@@ -47,6 +54,7 @@ def send_mail(sum):
             </style>
         </head>
         <body>
+            <a href="https://skinsmonkey.com/trade">SkinsMonkey</a>
             <p>[update] &nbsp; {datetime.datetime.now():%d/%m/%Y %H:%M:%S}</p>
             <div>{message}</div>
         </body>

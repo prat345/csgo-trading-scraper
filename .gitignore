@@ -4,4 +4,9 @@
 test.*
 web_scrapping.py
 skinmonkey_bs.py
+comment-bot.py
+config.*
+
 __pycache__/
+
+.env

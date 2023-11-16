@@ -5,12 +5,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
+from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import time
 import re
 
 def open_site():
-  path = "C:\Program Files (x86)\chromedriver-win64\chromedriver.exe"
+  # path = "C:\Program Files (x86)\chromedriver-win64\chromedriver.exe"
+  path = "c:/Program Files (x86)/chromedriver-win64/chrome119/chromedriver.exe"
   options = webdriver.ChromeOptions()
   options.headless = True
   # options.add_argument('--headless')
@@ -20,8 +23,8 @@ def open_site():
   options.add_argument('log-level=3') # surpress warning
   driver = webdriver.Chrome(
     path,
-    options=options
-   )
+    # service=Service(ChromeDriverManager().install()),
+    options=options)
   driver.maximize_window()
   driver.get("https://skinsmonkey.com/trade")
   # driver.implicitly_wait(10)
@@ -107,7 +110,7 @@ def search(search_item, driver, site):
     # items = container.find_elements('xpath', "//div[contains(@class, 'item-card item-card--730')]")
     btns = container.find_elements('xpath', "//div[contains(@class, 'item-card__action item-card__action--info')]")
     for i, btn in enumerate(btns):
-      if i > 4: break
+      if i > 2: break
       action = ActionChains(driver)
       # action.move_to_element(items[i])
       action.move_to_element(btn)
@@ -146,7 +149,7 @@ def exec():
   driver, site = open_site()
   item_exterior()
   sum = {}
-  for i in ['AWP Asiimov', 'AWP Containment breach', 'FAMAS Mecha industries']:
+  for i in ['AWP Asiimov', 'M4A4 | Buzz Kill', 'AK | Fuel Injector', 'M4A1-S | Cyrex']:
     try:
       print('-'*100)
       print('>>>', i)
